@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sign in demo</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Sign-In Demo</title>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="151340646631-5qv86uh81sv4u1rcc76c6sr4tk89iqud.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="219758474264-vh1bibcphgvbc32km508lubtqkanikf1.apps.googleusercontent.com">
 
 </head>
 
 <body>
+
+
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
 
     <a href="#" onclick="signOut();">Sign out</a>
     <script>
@@ -25,7 +29,6 @@
     </script>
 
 
-
     <script>
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
@@ -35,21 +38,22 @@
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
 
-            var id_token = googleUser.getAuthResponse().id_token
+            var id_token = googleUser.getAuthResponse().id_token;
 
             console.log(id_token);
 
 
-
             var xhr = new XMLHttpRequest();
-            xhr.abierto('POST', '/google');
-            xhr.setRequestHeader('Content-Type', 'application / x-www-form-urlencoded');
+            xhr.open('POST', '/google');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
-                consola.log('Conectado como:' + xhr.responseText);
+                console.log('Signed in as: ' + xhr.responseText);
             };
-            xhr.enviar('idtoken =' + id_token);
+            xhr.send('idtoken=' + id_token);
+
         }
     </script>
+
 </body>
 
 </html>
